@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+    <configuration>
+		<properties>
+			<property name="dialect" value="mySql" />
+		</properties>
+		<settings>
+			<setting name="logImpl" value="LOG4J"/>
+		</settings>
+
+    	<typeAliases>
+			<typeAlias alias="SelectVo" type="com.wh.module.common.model.SelectVo" />
+    		<typeAlias alias="User" type="com.wh.module.user.model.User" />
+    		<typeAlias alias="Company" type="com.wh.module.company.model.Company" />
+    		<typeAlias alias="Department" type="com.wh.module.department.model.Department" />
+    		<typeAlias alias="Menu" type="com.wh.module.menu.model.Menu" />
+    		<typeAlias alias="Dict" type="com.wh.module.dict.model.Dict" />
+    		<typeAlias alias="DictType" type="com.wh.module.dict.model.DictType" />
+    		<typeAlias alias="Role" type="com.wh.module.role.model.Role" />
+    		<typeAlias alias="Province" type="com.wh.module.region.model.Province" />
+    		<typeAlias alias="City" type="com.wh.module.region.model.City" />
+    		<typeAlias alias="District" type="com.wh.module.region.model.District" />
+    		<typeAlias alias="BaseTree" type="com.wh.module.common.model.BaseTree" />
+			<package name="com.wh.module.customer.model"></package>
+			<package name="com.wh.module.supplier.model"></package>
+			<package name="com.wh.module.order.model"></package>
+			<package name="com.wh.module.account.model"></package>
+			<package name="com.wh.module.stock.model"></package>
+			<package name="com.wh.trade.customer.entity"></package>
+			<package name="com.wh.trade.supplier.entity"></package>
+		</typeAliases>
+   </configuration>

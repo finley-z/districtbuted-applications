@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd">
+
+	<diskStore path="../webapps/ROOT/WEB-INF/cache" />
+	<!-- <diskStore path="java.io.tmpdir"/> -->
+
+	<defaultCache maxElementsInMemory="1000" eternal="false"
+		overflowToDisk="true" diskPersistent="true" timeToIdleSeconds="600"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		diskExpiryThreadIntervalSeconds="120" />
+
+	<cache name="testCache" maxElementsInMemory="1000" eternal="false"
+		overflowToDisk="true" diskPersistent="true" timeToIdleSeconds="600"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU" />
+		
+	<cache name="userCache" maxElementsInMemory="1000" eternal="false"
+		overflowToDisk="true" diskPersistent="true" timeToIdleSeconds="600"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU" />
+		
+	<cache name="cacheForver"
+		maxElementsInMemory="5000"
+		eternal="true"
+		overflowToDisk="true" />
+
+</ehcache>

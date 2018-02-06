@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="
+           http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+           http://www.springframework.org/schema/context 
+           http://www.springframework.org/schema/context/spring-context-3.2.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/mvc 
+           http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+	<!-- 自动扫描bean，把作了注解的类转换为bean -->
+	<context:component-scan base-package="com.wh">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/> 
+	</context:component-scan>
+	
+	<!-- 启动Spring MVC的注解功能 -->
+	<mvc:annotation-driven />
+
+	<!-- 配置解析视图 -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	    <property name="prefix" value="/WEB-INF/pages/" />
+		<property name="suffix" value=".jsp"/> 
+	</bean>
+    
+    <!-- 避免执行AJAX时,返回text乱码 -->
+    <bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/plain;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	
+    <!-- 配置springmvc上传下载  -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	<property name="maxUploadSize" value="10240000" /><!-- 上传最大数配置 10M -->
+    	<property name="defaultEncoding" value="UTF-8" />
+    </bean>
+    
+    <!-- <mvc:resources location="/resources/" mapping="/resources/**" />-->
+    
+    <!-- 拦截配置 --> 
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/login" />
+			<mvc:exclude-mapping path="/recharge" />
+			<mvc:exclude-mapping path="/query" />
+			<mvc:exclude-mapping path="/product" />
+			<mvc:exclude-mapping path="/dict/getDict.json" />
+			<mvc:exclude-mapping path="/user/login" />
+			<mvc:exclude-mapping path="/user/sendPhoneCode" />
+			<mvc:exclude-mapping path="/user/password" />
+			<mvc:exclude-mapping path="/user/loginout" />
+			<mvc:exclude-mapping path="/common/interface/gprsrealsingle" />
+			<mvc:exclude-mapping path="/cardInfo/queryStatus" />
+			<mvc:exclude-mapping path="/common/interface/gprsrealtimeinfo" />
+			<mvc:exclude-mapping path="/wx/**" />
+   			<bean class="com.wh.core.filter.Interceptor" />
+   		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!--aop配置-->
+	<!-- 激活组件扫描功能,在包cn.ysh.studio.spring.aop及其子包下面自动扫描通过注解配置的组件 -->
+	<context:component-scan base-package="com.wh.module.aop"/>
+	<!-- 激活自动代理功能 -->
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	
+</beans>
